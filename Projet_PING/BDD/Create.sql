@@ -1,10 +1,9 @@
-------------------------------------------
 -- @Author: MALETERRE Antoine, QULORE Sarah
 -- @Version: 1.0
 -- @DateCreation: 14/09/2018
 -- @DateDerniereModif: 14/09/2018
 -- @NomBaseDeDonnees : bdd_projet_ping
-------------------------------------------
+
 
 -- Suppression des tables si elles existes
 
@@ -16,7 +15,7 @@ drop table if EXISTS Document;
 
 create table UserPING
 (
-  	id_User int primary key,
+  	id_User int AUTO_INCREMENT primary key,
   	nom varchar(45) not null,
   	prenom varchar(45) not null,
 	email varchar(45) not null,
@@ -28,7 +27,7 @@ create table UserPING
 
 create table Document
 (
-  	id_Document int primary key,
+  	id_Document int AUTO_INCREMENT primary key,
 	titreDocument varchar(45) not null,
 	resumeDocument varchar(280),
 	departement varchar(45) not null,
