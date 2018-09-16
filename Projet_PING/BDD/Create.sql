@@ -1,7 +1,7 @@
 -- @Author: MALETERRE Antoine, QULORE Sarah
--- @Version: 1.0
+-- @Version: 1.1
 -- @DateCreation: 14/09/2018
--- @DateDerniereModif: 14/09/2018
+-- @DateDerniereModif: 16/09/2018
 -- @NomBaseDeDonnees : bdd_projet_ping
 
 
@@ -33,5 +33,6 @@ create table Document
 	departement varchar(45) not null,
   	nomDocument varchar(45) not null,
 	document longblob not null,
-	id_User_doc int references UserPING(id_User)
+	id_User_doc int references UserPING(id_User),
+    motsClef varchar(45)
 );
