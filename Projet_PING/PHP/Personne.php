@@ -10,8 +10,8 @@
         public function __construct($nom, $prenom, $mail, $situation) { 
             $this->setNom($nom); // Initialisation du nom.
             $this->setPrenom($prenom); // Initialisation du prenom.
-            $this->setmail($mail); // Initialisation du mail.
-            $this->setsituation($situation); // Initialisation de la situation.
+            $this->setMail($mail); // Initialisation du mail.
+            $this->setSituation($situation); // Initialisation de la situation.
         }
 
         // Mutateurs et Accesseurs
@@ -43,7 +43,7 @@
             return $this->_prenom;
         }
         
-        public function setPrenom($mail) {
+        public function setMail($mail) {
             // S'il ne s'agit pas d'une chaine de caractère.
             if (!is_string($mail))  {
             trigger_error('Mail: doit être une chaine de caractère', E_USER_WARNING);
@@ -53,11 +53,11 @@
             $this->_mail = $mail;
         }
         
-        public function getPrenom() {
+        public function getMail() {
             return $this->_mail;
         }
         
-        public function setPrenom($situation) {
+        public function setSituation($situation) {
             // S'il ne s'agit pas d'une chaine de caractère.
             if (!is_string($situation))  {
             trigger_error('Situation: doit être une chaine de caractère', E_USER_WARNING);
@@ -67,7 +67,7 @@
             $this->_situation = $situation;
         }
         
-        public function setPrenom() {
+        public function getSituation() {
             return $this->_situation;
         }
     }

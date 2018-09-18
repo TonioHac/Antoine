@@ -67,9 +67,10 @@
         }
         
         // Permet d'insérer un nouvel utilisateur
-        public function insertUser($nom, $prenom, $mail, situation, mdp) {
+        public function insertUser($nom, $prenom, $mail, $situation, $mdp) {
             /* Préparation de la commande d'insertion */
-            $query = "INSERT INTO myCity (Name, CountryCode, District) VALUES (?,?,?)";
+            $query = 'INSERT INTO userPING (nom, prenom, email, situation, mdp) VALUES ('. $nom .','. $prenom .','. $mail .','. $situation .','. $mdp .')';
+            
             $stmt = $mysqli->prepare($query);
             
             // A terminer
@@ -82,40 +83,4 @@
         }
         
     }
-
-    
-
-    /* Préparation de la commande d'insertion */
-    $query = "INSERT INTO myCity (Name, CountryCode, District) VALUES (?,?,?)";
-    $stmt = $mysqli->prepare($query);
-
-    $stmt->bind_param("sss", $val1, $val2, $val3);
-
-    $val1 = 'Stuttgart';
-    $val2 = 'DEU';
-    $val3 = 'Baden-Wuerttemberg';
-
-    /* Exécute la requête */
-    $stmt->execute();
-
-    $val1 = 'Bordeaux';
-    $val2 = 'FRA';
-    $val3 = 'Aquitaine';
-
-    /* Exécute la requête */
-    $stmt->execute();
-
-    /* Ferme la requête */
-    $stmt->close();
-
-    /* Récupère toutes les lignes de la table myCity */
-    $query = "SELECT Name, CountryCode, District FROM myCity";
-    if ($result = $mysqli->query($query)) {
-        while ($row = $result->fetch_row()) {
-            printf("%s (%s,%s)\n", $row[0], $row[1], $row[2]);
-        }
-        /* Libère le résultat */
-        $result->close();
-    }
-
 ?>
