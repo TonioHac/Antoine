@@ -1,7 +1,7 @@
 -- @Author: MALETERRE Antoine, QULORE Sarah
--- @Version: 1.1
+-- @Version: 1.2
 -- @DateCreation: 14/09/2018
--- @DateDerniereModif: 16/09/2018
+-- @DateDerniereModif: 20/09/2018
 -- @NomBaseDeDonnees : bdd_projet_ping
 
 
@@ -16,6 +16,13 @@ drop table if EXISTS Document;
 create table UserPING
 (
   	id_User int AUTO_INCREMENT primary key,
+    civilite varchar(4) not null,
+    telephone varchar(12) not null,
+    societe varchar(45) not null,
+    adresse varchar(45) not null,
+    codePostal varchar(5) not null,
+    ville varchar(45) not null,
+    pays varchar(45) not null,
   	nom varchar(45) not null,
   	prenom varchar(45) not null,
 	email varchar(45) not null,
