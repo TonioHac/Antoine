@@ -16,7 +16,8 @@
             include('InterConnexionBDD.php');
             $conn = new InterConnexionBDD('localhost','root','root','bdd_projet_ping');
             $conn->ConnexionBDD();
-            $conn->insertUser('QULORE','Sarah','sarah.qulore@gmail.com','Tuteur', 'sarahQ');
+            //$conn->insertUser('QULORE','Sarah','sarah.qulore@gmail.com','Tuteur', 'sarahQ');
+            $conn->selectUserInfo('dupont.paul@gmail.com');
             
         ?>
     </body>
