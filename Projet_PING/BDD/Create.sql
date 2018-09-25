@@ -27,7 +27,8 @@ create table UserPING
   	prenom varchar(45) not null,
 	email varchar(45) not null,
 	situation varchar(45) not null,
-	mdp varchar(128) not null
+	mdp varchar(128) not null,
+    salt varchar(45) not null
 );
 
 -- creation de la table Document
