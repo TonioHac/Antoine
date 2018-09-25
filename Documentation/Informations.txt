@@ -1,0 +1,13 @@
+Date de passage : 06/11/18 à 17H50
+
+groupe : 9
+login : grp_12_9
+password : IZaech9joW
+DBname : bdd_12_9
+
+https://moduleweb.esigelec.fr/grp
+
+moduleweb.esigelec.fr/phpmyadmin
+
+193.52.189.34
+
