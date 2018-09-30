@@ -1,13 +1,15 @@
 <?php
     class Personne {
         // Attributs
+        private $_id;
         private $_nom;
         private $_prenom;
         private $_mail;
         private $_situation;
 
         // Constructeur demandant 4 paramètres
-        public function __construct($nom, $prenom, $mail, $situation) { 
+        public function __construct($id, $nom, $prenom, $mail, $situation) { 
+            $this->setID($id); // Initialisation de l'ID.
             $this->setNom($nom); // Initialisation du nom.
             $this->setPrenom($prenom); // Initialisation du prenom.
             $this->setMail($mail); // Initialisation du mail.
@@ -15,6 +17,20 @@
         }
 
         // Mutateurs et Accesseurs
+        public function setID($id) {
+            // S'il ne s'agit pas d'une chaine de caractère.
+            if (!is_int($id))  {
+                trigger_error('Nom: doit être une chaine de caractère', E_USER_WARNING);
+                return;
+            }
+
+            $this->_id = $id;
+        }
+        
+        public function getID() {
+            return $this->_id;
+        }
+        
         public function setNom($nom) {
             // S'il ne s'agit pas d'une chaine de caractère.
             if (!is_string($nom))  {

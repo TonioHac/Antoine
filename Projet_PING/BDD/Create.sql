@@ -20,7 +20,7 @@ create table UserPING
     telephone varchar(12) not null,
     societe varchar(45) not null,
     adresse varchar(45) not null,
-    codePostal varchar(5) not null,
+    codePostal int(5) not null,
     ville varchar(45) not null,
     pays varchar(45) not null,
   	nom varchar(45) not null,
@@ -28,7 +28,7 @@ create table UserPING
 	email varchar(45) not null,
 	situation varchar(45) not null,
 	mdp varchar(128) not null,
-    salt varchar(45) not null
+    salt varchar(128) not null
 );
 
 -- creation de la table Document

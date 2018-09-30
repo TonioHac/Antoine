@@ -67,36 +67,92 @@
         }
         
         // Permet d'insérer un nouvel utilisateur
-        public function insertUser($nom, $prenom, $mail, $situation, $mdp) {
+        public function insertUser($civilite, $telephone, $societe, $adresse, $codePostal, $ville, $pays, $nom, $prenom, $mail, $situation, $mdp) {
             /* Préparation de la commande d'insertion */
-            $query = 'INSERT INTO userPING (nom, prenom, email, situation, mdp) VALUES ('. $nom .','. $prenom .','. $mail .','. $situation .','. $mdp .')';
+            $salt = $this->getSalt();
+            $passWord = $this->getPwdHash($mdp, $salt);
             
-            $stmt = $mysqli->prepare($query);
+            $query = "INSERT INTO userping (civilite, telephone, societe, adresse, codePostal, ville, pays, nom, prenom, email, situation, mdp, salt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             
-            // A terminer
+            if(!($stmt = $this->_mysqli->prepare($query))) {
+                echo "Echec lors de la création du compte";
+            }
             
+            if($stmt->bind_param('ssssdssssssss', $civilite, $telephone, $societe, $adresse, $codePostal, $ville, $pays, $nom, $prenom, $mail, $situation, $passWord,$salt)) {
+                echo "Echec de la liaison";
+            }
+            
+            if (!$stmt->execute()) {
+                echo "Echec lors de l'exécution";
+            }
+        }
+        
+        //Permet d'insérer un nouveau document
+        public function insertDocument($titre, $resume, $departement, $nom, $doc, $idUser, $motC) {
+            /* Préparation de la commande d'insertion */            
+            $query = "INSERT INTO document (titreDocument, resumeDocument, departement, nomDocument, document, id_User_doc, motsClef) VALUES (?,?,?,?,?,?,?)";
+            
+            if(!($stmt = $this->_mysqli->prepare($query))) {
+                echo "Echec lors de la création du compte";
+            }
+            
+            if($stmt->bind_param('ssssbis', $titre, $resume, $departement, $nom, $doc, $idUser, $motC)) {
+                echo "Echec de la liaison";
+            }
+            
+            if (!$stmt->execute()) {
+                echo "Echec lors de l'exécution";
+            }
         }
         
         // Permet de récupérer les informations de l'utilisateur
         public function selectUserInfo($mail) {
             /* Préparation de la demande d'information d'utilisateur */
-            $query = "SELECT * FROM userping WHERE email = '" . $mail ."'";
-            $result = $this->_mysqli->query($query);    
+            $query = "SELECT id_User, nom, prenom, email, situation FROM userping WHERE email = '" . $mail ."'"; 
+            $array = "error";
             
-            if ($result->num_rows > 0) {
-                // Boucle s'il y a plusieurs lignes
-                while($row = $result->fetch_assoc()) {
-                    echo "Nom: " . $row["nom"]. " - Prénom: " . $row["prenom"]. " - mail: " . $row["email"]. "<br>";
+            if ($stmt = $this->_mysqli->prepare($query)) {
+                /* Exécution de la requête */
+                $stmt->execute();
+
+                /* Association des variables de résultat */
+                $stmt->bind_result($id, $nom, $prenom, $email, $situation);
+
+                /* Lecture des valeurs */
+                while ($stmt->fetch()) {
+                    $array = array($id, $nom, $prenom, $email, $situation);
                 }
-            } else {
-                echo "0 results";
+
+                /* Fermeture de la commande */
+                $stmt->close();
             }
+            
+            return $array;
         }
-        
+
         // Permet de se déconnecter de la BDD
         public function DeconnexionBDD() {
             $this->_mysqli->close();
         }
         
+        //Permet de générer un MDP crypter avec un salt
+        public function getPwdHash($passWord, $salt){
+            $hashed_password = crypt($passWord, $salt);
+            return $hashed_password;
+        }
+        
+        //Permet de générer un Salt aléatoirement
+        public function getSalt(){
+            //Initialisation des caractères
+            $charact = array(0,1,2,3,4,5,6,7,8,9,"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
+            $salt = "";
+            
+            for($i = 0; $i < 40; $i++){
+                $salt .= ($i%2) ? strtoupper($charact[array_rand($charact)]) : $charact[array_rand($charact)];
+            }
+            
+            return $salt;
+        }
+
     }
 ?>
