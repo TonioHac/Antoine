@@ -1,0 +1,107 @@
+.menu{
+    width: 100%;
+    height: 66px;
+    background: #F44336;
+    line-height: 66px;
+}
+
+.m-left{
+float: left;
+}
+    
+.m-right{
+float: right;    
+}
+
+.m-link{
+text-decoration: none;
+color: white;
+text-transform: uppercase;
+font-weight: 900;
+padding: O;
+margin: 0 15px;
+transition: all 0.3s ease-in-out; 
+border-bottom: 2px solid transparent;
+    padding-bottom: 3px; 
+}
+
+.logo{
+margin: 0;
+padding: 0;
+color: white;
+text-transform: uppercase;
+font-size: 35px;
+letter-spacing: 1px;
+}
+
+.m-link:hover{
+
+border-color: white;   
+}
+
+.m-link i{
+margin-right: 5px;
+}
+
+.m-nav-toggle{
+    width: 40px;
+    height: 66px;
+
+    display: none;
+    align-items: center;
+    float: right;
+    cursor: pointer;
+    
+}
+span.m-toggle-icon, span.m-toggle-icon:before, span.m-toggle-icon:after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: white;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+span.m-toggle-icon:before{top:12px;}
+span.m-toggle-icon:after{top:-14px;}
+
+
+.m-right.is-open{
+    transform: translateX(0);
+}
+
+.m-nav-toggle.is-open span.m-toggle-icon{
+    background: transparent;
+}
+
+.m-nav.toggle.is-open span.m-toggle-icon:before, .m-nav-toggle.is-open span.m-toggle-icon:after{
+    transform-origin: center;
+    transform : rotate(45deg);
+    top: 0;
+}
+
+.m-nav-toggle.is-open span.m-toggle-icon:before{
+    transform: rotate(-45deg);
+}
+
+@media only screen and (max-width: 880px){
+    .m-right{
+       position: absolute;
+        top: 70px; right: 0;
+        width: 200px;
+        height: 100%;
+        background: red;
+        transform: translateX(100%);
+        transition: all 0.3s ease-in-out;
+    }
+    .m-link{
+        display: block;
+        text-align: center;
+        padding: 0;
+        margin: 0 20px;
+        height: 55px;
+    }
+    .m-nav-toggle{
+        display: flex;
+    }
+}
